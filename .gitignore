@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build outputs
+dist/
+build/
+
+# Log files
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Angular build artifacts
+.angular/
+.tmp/
+
+# npm debug files
+npm-debug.log*
+.npmrc
+
+# MongoDB backup files
+dump/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+# TypeScript build output
+*.js
+*.map
