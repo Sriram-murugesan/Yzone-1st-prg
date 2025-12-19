@@ -1,6 +1,6 @@
 # API Documentation
 
-This document provides details about the RESTful API endpoints for the AI Decision Justification Tracker.
+This document provides details about the RESTful API endpoints for the AI Decision Justification Tracker, now powered by DeepSeek LLM via Ollama.
 
 ## Authentication
 
@@ -166,7 +166,7 @@ Retrieves a specific decision by ID.
 
 **PUT** `/api/decisions/:id/outcome`
 
-Updates a decision with the actual outcome and triggers AI analysis.
+Updates a decision with the actual outcome and triggers AI analysis using DeepSeek LLM via Ollama.
 
 **Request Body:**
 ```json
@@ -205,12 +205,12 @@ Updates a decision with the actual outcome and triggers AI analysis.
 
 **POST** `/api/decisions/:id/analyze`
 
-Manually triggers AI analysis for a decision.
+Manually triggers AI analysis for a decision using DeepSeek LLM via Ollama.
 
 **Response:**
 ```json
 {
-  "message": "AI analysis completed successfully",
+  "message": "AI analysis completed successfully using DeepSeek LLM",
   "analysis": {
     "comparison": "string",
     "invalidAssumptions": ["string"],
@@ -274,3 +274,12 @@ or
   "error": "error details"
 }
 ```
+
+## AI Integration Details
+
+The AI analysis is now powered by DeepSeek LLM via Ollama:
+- Local inference with no external API dependencies
+- Uses the deepseek-r1 model by default (falls back to deepseek-coder)
+- Response time: 10-30 seconds depending on system specs
+- No API keys or cloud credentials required
+- Full privacy - all processing happens locally

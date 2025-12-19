@@ -1,10 +1,10 @@
 # AI Prompt Design for Decision Analysis
 
-This document explains the prompt engineering approach used for the retrospective decision analysis in the AI Decision Justification Tracker.
+This document explains the prompt engineering approach used for the retrospective decision analysis in the AI Decision Justification Tracker, now powered by DeepSeek LLM via Ollama.
 
 ## Core Principle
 
-The AI analysis focuses on **retrospective learning** rather than predictive modeling. It compares what was expected with what actually happened to extract insights for future decision-making.
+The AI analysis focuses on **retrospective learning** rather than predictive modeling. It compares what was expected with what actually happened to extract insights for future decision-making using the DeepSeek LLM.
 
 ## Prompt Structure
 
@@ -85,6 +85,14 @@ If the AI response cannot be parsed as valid JSON, the system falls back to a de
 ## Continuous Improvement
 
 The prompt design can be refined based on:
-- Quality of AI analyses received
+- Quality of AI analyses received from DeepSeek LLM
 - User feedback on usefulness of insights
 - Domain-specific requirements for different types of decisions
+
+## Implementation Notes
+
+The AI service now integrates with DeepSeek LLM via Ollama's REST API:
+- Uses the `/api/generate` endpoint
+- Configurable model selection (deepseek-r1 or deepseek-coder)
+- Local inference with no external API dependencies
+- Structured JSON parsing with fallback mechanisms

@@ -12,7 +12,7 @@ This application focuses on decision reflection and learning rather than predict
 - RESTful API with JWT-based authentication
 - MongoDB integration for data persistence
 - Decision and User models with proper validation
-- AI integration for retrospective analysis
+- AI integration for retrospective analysis using DeepSeek LLM via Ollama
 - Secure input validation and error handling
 
 ### Frontend (Angular)
@@ -24,11 +24,12 @@ This application focuses on decision reflection and learning rather than predict
 - Dashboard with statistics
 
 ### AI Integration
-- Retrospective analysis comparing expected vs actual outcomes
+- Retrospective analysis comparing expected vs actual outcomes using DeepSeek LLM
 - Identification of invalid assumptions
 - Extraction of lessons learned
 - Reflective suggestions for future decisions
 - Structured prompt engineering for consistent analysis
+- Local AI inference via Ollama (no cloud API required)
 
 ## System Architecture
 
@@ -36,8 +37,8 @@ This application focuses on decision reflection and learning rather than predict
 graph TD
     A[Angular Frontend] --> B[Express.js API]
     B --> C[MongoDB Database]
-    B --> D[AI Service API]
-    D --> E[OpenAI GPT]
+    B --> D[Ollama Service]
+    D --> E[DeepSeek LLM]
 ```
 
 ## Folder Structure
@@ -81,7 +82,7 @@ graph TD
 ### Prerequisites
 - Node.js (v16 or higher)
 - MongoDB (local or cloud instance)
-- OpenAI API key (for AI analysis features)
+- Ollama with DeepSeek model (for AI analysis features)
 
 ### Backend Setup
 
@@ -100,7 +101,8 @@ graph TD
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/ai-decision-tracker
    JWT_SECRET=your_jwt_secret_key
-   AI_API_KEY=your_openai_api_key
+   OLLAMA_URL=http://localhost:11434
+   OLLAMA_MODEL=deepseek-r1
    ```
 
 4. Start the backend server:
@@ -127,6 +129,19 @@ graph TD
 
 4. Access the application at `http://localhost:4200`
 
+### Ollama + DeepSeek Setup
+
+1. Download and install Ollama from [https://ollama.ai](https://ollama.ai)
+2. Pull the DeepSeek model:
+   ```
+   ollama pull deepseek-r1
+   ```
+3. Verify the model is available:
+   ```
+   ollama list
+   ```
+4. For detailed setup instructions, see [OLLAMA_SETUP_GUIDE.md](OLLAMA_SETUP_GUIDE.md)
+
 ## API Endpoints
 
 ### Authentication
@@ -138,7 +153,7 @@ graph TD
 - `GET /api/decisions` - Get all decisions for user
 - `GET /api/decisions/:id` - Get a specific decision
 - `PUT /api/decisions/:id/outcome` - Update decision with actual outcome
-- `POST /api/decisions/:id/analyze` - Trigger AI analysis for a decision
+- `POST /api/decisions/:id/analyze` - Trigger AI analysis for a decision using DeepSeek LLM
 - `DELETE /api/decisions/:id` - Delete a decision
 
 ## AI Prompt Design
@@ -189,7 +204,7 @@ Please provide a structured analysis with the following sections:
    - Actual outcome
    - Success level (1-5)
    - Unexpected factors
-4. **AI Analysis**: The system automatically analyzes the decision or users can manually trigger analysis
+4. **AI Analysis**: The system automatically analyzes the decision or users can manually trigger analysis using DeepSeek LLM via Ollama
 5. **Learning Review**: Users review the AI-generated insights:
    - Expectation vs reality comparison
    - Invalid assumptions identified
